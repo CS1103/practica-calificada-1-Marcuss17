@@ -48,12 +48,13 @@ ostream& operator<<(ostream& os, const Polynomial& P){
         ss << aux->coef;
         ss >> mystr;
         polButStr +=mystr;
-        ss.clear();
         if(aux->grado != 0){
+            ss.clear();
             polButStr +="x^";
             ss<<aux->grado;
             ss>> mystr;
             polButStr +=mystr;
+            polButStr +="+";
         }
         aux = aux->next;
     }
@@ -214,6 +215,49 @@ Polynomial operator+=(Polynomial& P1, Polynomial& P2){
     else{
         return P1;
     }
+}
+
+Polynomial operator*(Polynomial& P1, Polynomial& P2){
+    indivPol* auxmenor; int menorexponente = 999;
+    indivPol* auxmayor;
+    bool mayor;
+    if(P1.polCounter < P2.polCounter){
+        menorexponente = P1.polCounter;
+        auxmenor = P1.top;
+        auxmayor = P2.top;
+        mayor = true;
+    }
+    else{
+        menorexponente = P2.polCounter;
+        auxmenor = P2.top;
+        auxmayor = P1.top;
+        mayor = false;
+    }
+    for(int i = 0; i < menorexponente; i++){
+        while(auxmenor != nullptr){
+            auxmayor->coef *= auxmenor->coef;
+            auxmayor->grado += auxmenor->grado;
+            auxmenor = auxmenor->next;
+        }
+    }
+    if(mayor == true){
+        return P2;
+    }
+    else{
+        return P1;
+    }
+}
+
+Polynomial operator^(Polynomial& P1, int exponente){
+    indivPol* aux = P1.top;
+    for(int i= 0; i < exponente; i++){
+        while(aux != nullptr){
+            aux->grado += aux->grado;
+            aux->coef *= aux->coef;
+            aux = aux->next;
+        }
+    }
+    return P1;
 }
 
 

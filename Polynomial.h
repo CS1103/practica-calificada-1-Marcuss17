@@ -17,8 +17,9 @@ struct indivPol{
 class Polynomial {
 private:
     indivPol* top;
-    int polCounter;
+
 public:
+    int polCounter;
     Polynomial();
     Polynomial(const Polynomial&) = default;
     void add(double, int);
@@ -31,6 +32,8 @@ public:
     friend Polynomial operator+(Polynomial&, Polynomial&);
     friend Polynomial operator+=(Polynomial&, Polynomial&);
     friend Polynomial operator*(double, Polynomial&);
+    friend Polynomial operator*(Polynomial&, Polynomial&);
+    friend Polynomial operator^(Polynomial&, int);
 
 };
 
