@@ -22,15 +22,15 @@ public:
     Polynomial();
     Polynomial(const Polynomial&) = default;
     void add(double, int);
-    int getGrado();
+    int degree();
     friend ostream& operator<<(ostream& os, const Polynomial&);
-    Polynomial operator+(const Polynomial&);
     Polynomial operator+(double);
     friend Polynomial operator+(double, Polynomial);
     friend Polynomial operator+=(Polynomial,double);
     Polynomial operator*(int);
-    friend Polynomial operator+(const Polynomial&, const Polynomial&);
-
+    friend Polynomial operator+(Polynomial&, Polynomial&);
+    friend Polynomial operator+=(Polynomial&, Polynomial&);
+    friend Polynomial operator*(double, Polynomial&);
 
 };
 

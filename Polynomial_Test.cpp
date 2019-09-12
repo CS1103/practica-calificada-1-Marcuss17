@@ -48,9 +48,9 @@ TEST_CASE("Polynomial") {
 		Polynomial p1 = { {1, 0}, {-1, 1}, {6, 3} };
 #else
 		Polynomial p1;
-		p1.add({ 1, 0 });
-		p1.add({ -1, 1 });
-		p1.add({ 6, 3 });
+		p1.add( 1, 0 );
+		p1.add( -1, 1 );
+		p1.add( 6, 3 );
 #endif
 		REQUIRE(p1.degree() == 3);
 	}
@@ -61,14 +61,14 @@ TEST_CASE("Polynomial") {
 		Polynomial p2 = { {-1, 1}, {4, 2}, {3, 3} };
 #else
 		Polynomial p1;
-		p1.add({ 1, 0 });
-		p1.add({ -1, 1 });
-		p1.add({ 6, 3 });
+		p1.add( 1, 0 );
+		p1.add( -1, 1 );
+		p1.add( 6, 3 );
 
 		Polynomial p2;
-		p2.add({ -1, 1 });
-		p2.add({ 4, 2 });
-		p2.add({ 3, 3 });
+		p2.add( -1, 1 );
+		p2.add( 4, 2 );
+		p2.add( 3, 3 );
 #endif
 
 		auto p3 = p1 + p2;
@@ -106,7 +106,7 @@ TEST_CASE("Polynomial") {
 
 		Polynomial p2;
 		p2.add( 1, 0 );
-		p2.add({ -3, 1 });
+		p2.add( -3, 1);
 #endif
 		auto p3 = p1 * p2;
 		REQUIRE(get_expression(p1) == "1+3x^1");

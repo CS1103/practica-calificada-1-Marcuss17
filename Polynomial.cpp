@@ -27,7 +27,7 @@ void Polynomial::add(double coeficiente, int grado) {
     }
 }
 
-int Polynomial::getGrado() {
+int Polynomial::degree() {
     int mayor = 0;
     indivPol* aux1 = top;
     while(aux1 != nullptr){
@@ -48,25 +48,48 @@ ostream& operator<<(ostream& os, const Polynomial& P){
         ss << aux->coef;
         ss >> mystr;
         polButStr +=mystr;
-        polButStr +="x^";
         ss.clear();
-        ss<<aux->grado;
-        ss>> mystr;
-        polButStr +=mystr;
+        if(aux->grado != 0){
+            polButStr +="x^";
+            ss<<aux->grado;
+            ss>> mystr;
+            polButStr +=mystr;
+        }
         aux = aux->next;
     }
     os << polButStr;
     return os;
 }
 
-Polynomial operator+(const Polynomial& P1, const Polynomial& P2){
-    indivPol* aux1; int menorexponente = 999;
+Polynomial operator+( Polynomial& P1,Polynomial& P2){
+    indivPol* auxmenor; int menorexponente = 999;
+    indivPol* auxmayor;
+    bool mayor;
     if(P1.polCounter < P2.polCounter){
         menorexponente = P1.polCounter;
-
+        auxmenor = P1.top;
+        auxmayor = P2.top;
+        mayor = true;
     }
     else{
         menorexponente = P2.polCounter;
+        auxmenor = P2.top;
+        auxmayor = P1.top;
+        mayor = false;
+    }
+    for(int i = 0; i < menorexponente; i++){
+        while(auxmenor != nullptr){
+            if(auxmenor->grado == auxmayor->grado){
+                auxmayor->coef += auxmenor->coef;
+            }
+            auxmenor = auxmenor->next;
+        }
+    }
+    if(mayor == true){
+        return P2;
+    }
+    else{
+        return P1;
     }
 }
 
@@ -94,12 +117,22 @@ Polynomial Polynomial::operator+(double val) {
     return P1;
 }
 
-
 Polynomial Polynomial::operator*(int val) {
     Polynomial P1;
     P1.top = top;
     indivPol* aux1;
     aux1 = top;
+    while(aux1 != nullptr){
+        aux1->coef *= val;
+        aux1 = aux1->next;
+    }
+    return P1;
+}
+
+Polynomial operator*(double val, Polynomial& P){
+    Polynomial P1;
+    P1.top = P.top;
+    indivPol* aux1;
     while(aux1 != nullptr){
         aux1->coef *= val;
         aux1 = aux1->next;
@@ -150,6 +183,40 @@ Polynomial operator+=(Polynomial P1,double val){
     }
     return P1;
 }
+
+Polynomial operator+=(Polynomial& P1, Polynomial& P2){
+    indivPol* auxmenor; int menorexponente = 999;
+    indivPol* auxmayor;
+    bool mayor;
+    if(P1.polCounter < P2.polCounter){
+        menorexponente = P1.polCounter;
+        auxmenor = P1.top;
+        auxmayor = P2.top;
+        mayor = true;
+    }
+    else{
+        menorexponente = P2.polCounter;
+        auxmenor = P2.top;
+        auxmayor = P1.top;
+        mayor = false;
+    }
+    for(int i = 0; i < menorexponente; i++){
+        while(auxmenor != nullptr){
+            if(auxmenor->grado == auxmayor->grado){
+                auxmayor->coef += auxmenor->coef;
+            }
+            auxmenor = auxmenor->next;
+        }
+    }
+    if(mayor == true){
+        return P2;
+    }
+    else{
+        return P1;
+    }
+}
+
+
 
 
 
