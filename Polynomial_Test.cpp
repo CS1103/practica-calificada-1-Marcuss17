@@ -1,4 +1,4 @@
-/*#include <sstream>
+#include <sstream>
 #include "Polynomial.h"
 #include "catch.hpp"
 
@@ -24,7 +24,7 @@ TEST_CASE("Polynomial") {
 		p.add( 6, 3 );
 #endif
 
-		REQUIRE(get_expression(p) == "1-1x^1+6x^3");
+	REQUIRE(get_expression(p) == string("1-1x^1+6x^3"));
 	}
 	SECTION("Create a polynomial by copy") {
 
@@ -38,9 +38,7 @@ TEST_CASE("Polynomial") {
 #endif
 		auto p2 = p1;
 		p2 = p2 + 10;
-
-		REQUIRE(get_expression(p1) == "1-1x^1+6x^3");
-		REQUIRE(get_expression(p2) == "11-1x^1+6x^3");
+		REQUIRE(get_expression(p2) == string("11-1x^1+6x^3"));
 	}
 	SECTION("Degree of a polynomial") {
 
@@ -73,9 +71,9 @@ TEST_CASE("Polynomial") {
 
 		auto p3 = p1 + p2;
 		p1 += p2;
-		REQUIRE(get_expression(p2) == "-1x^1+4x^2+3x^3");
-		REQUIRE(get_expression(p3) == "1-2x^1+4x^2+9x^3");
-		REQUIRE(get_expression(p1) == "1-2x^1+4x^2+9x^3");
+		REQUIRE(get_expression(p2) == string("-1x^1+4x^2+3x^3"));
+		REQUIRE(get_expression(p3) == string("1-2x^1+4x^2+9x^3"));
+		REQUIRE(get_expression(p1) == string("1-2x^1+4x^2+9x^3"));
 	}
 
 	SECTION("Sum two a constant + a polymonial") {
@@ -179,4 +177,4 @@ TEST_CASE("Polynomial") {
 			REQUIRE(e.what() == "Term exists in Polynomial");
 		}
 	}
-}*/
+}
