@@ -22,7 +22,7 @@ public:
     int polCounter;
     void showP();
     Polynomial();
-    Polynomial(const Polynomial&) = default;
+    Polynomial(const Polynomial& P2) {top = P2.top;}
     void add(double, int);
     int degree();
     friend ostream& operator<<(ostream& os, const Polynomial&);
