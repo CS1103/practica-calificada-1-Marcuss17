@@ -91,6 +91,7 @@ Polynomial operator+( Polynomial& P1,Polynomial& P2){
                 auxmayor->coef += auxmenor->coef;
             }
             auxmenor = auxmenor->next;
+            auxmayor = auxmayor->next;
         }
     }
     if(mayor == true){

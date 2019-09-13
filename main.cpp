@@ -8,9 +8,14 @@ int main(){
     p.add(6,3);
     p.add(-1,1);
     p.add(1,0);
-
-
     std::cout<<p << endl;
+    auto p2 = p;
+    p2 = p2+p;
+
+
+
+
+    std::cout<<endl << p2 << endl;
 
     return 0;
 }
