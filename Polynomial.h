@@ -20,6 +20,7 @@ private:
 
 public:
     int polCounter;
+    void showP();
     Polynomial();
     Polynomial(const Polynomial&) = default;
     void add(double, int);

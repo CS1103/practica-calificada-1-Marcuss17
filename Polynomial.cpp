@@ -20,6 +20,7 @@ void Polynomial::add(double coeficiente, int grado) {
         auto* new_Pol = new indivPol();
         new_Pol->coef = coeficiente;
         new_Pol->grado = grado;
+        new_Pol->next = top;
         top = new_Pol;
         polCounter++;
     }catch (int e){
@@ -258,6 +259,14 @@ Polynomial operator^(Polynomial& P1, int exponente){
         }
     }
     return P1;
+}
+
+void Polynomial::showP() {
+    indivPol* aux = top;
+    while(aux != nullptr){
+        std::cout<<aux->coef << endl;
+        aux = aux->next;
+    }
 }
 
 
