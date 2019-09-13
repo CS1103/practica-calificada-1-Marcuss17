@@ -45,17 +45,23 @@ ostream& operator<<(ostream& os, const Polynomial& P){
     string mystr;
     stringstream ss;
     while(aux != nullptr){
-        ss.clear();
-        ss << aux->coef;
-        ss >> mystr;
-        polButStr +=mystr;
+        if(aux->grado == 0){
+            ss.clear();
+            ss << noshowpos << aux->coef;
+            ss >> mystr;
+            polButStr+=mystr;
+        }
+
         if(aux->grado != 0){
             ss.clear();
+            ss << showpos << aux->coef;
+            ss >> mystr;
+            polButStr +=mystr;
+            ss.clear();
             polButStr +="x^";
-            ss<<aux->grado;
+            ss<<noshowpos << aux->grado;
             ss>> mystr;
             polButStr +=mystr;
-            polButStr +="+";
         }
         aux = aux->next;
     }

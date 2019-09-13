@@ -4,12 +4,13 @@
 #include "catch.hpp"
 
 int main(){
-    Polynomial P1;
-    P1.add(1,2);
-    P1.add(-1,1);
-    P1.add(6,3);
-    std::cout<<P1 << endl;
-    P1.showP();
+    Polynomial p;
+    p.add(6,3);
+    p.add(-1,1);
+    p.add(1,0);
+
+
+    std::cout<<p << endl;
 
     return 0;
 }
